@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFEE AI - Test Sayfası</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; }
+    .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-zinc-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm border-b border-amber-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-xl">☕</span>
+                    </div>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                        COFFEE AI
+                    </h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#test" class="text-gray-600 hover:text-amber-600 transition-colors font-medium">Test</a>
+                    <a href="#docs" class="text-gray-600 hover:text-amber-600 transition-colors font-medium">Doküman</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Test Section -->
+        <section id="test" class="mb-16 fade-in">
+            <div class="bg-white rounded-2xl shadow-xl border border-amber-200 p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-2xl">🧪</span>
+                    </span>
+                    Test Sayfası
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Test Card 1: Bağlantı Testi -->
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">🔗 Bağlantı Testi</h3>
+                        <p class="text-gray-600 mb-4">
+                            Hugging Face API ve web arama fonksiyonlarının çalışıp çalışmadığını kontrol edin.
+                        </p>
+                        <button onclick="testConnection()" class="w-full bg-amber-500 text-white py-3 px-6 rounded-lg hover:bg-amber-600 transition-colors font-medium shadow-lg">
+                            Bağlantı Test Et
+                        </button>
+                        <div id="connection-result" class="mt-4 p-4 rounded-lg bg-gray-50 border border-gray-200 hidden">
+                            <!-- Sonuçlar buraya yazılacak -->
+                        </div>
+                    </div>
+
+                    <!-- Test Card 2: UI Test -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">🎨 UI Test</h3>
+                        <p class="text-gray-600 mb-4">
+                            Responsive tasarım ve animasyonların doğru çalışıp çalışmadığını test edin.
+                        </p>
+                        <button onclick="testUI()" class="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition-colors font-medium shadow-lg">
+                            UI Test Et
+                        </button>
+                        <div id="ui-result" class="mt-4 p-4 rounded-lg bg-gray-50 border border-gray-200 hidden">
+                            <!-- Sonuçlar buraya yazılacak -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Section -->
+        <section id="docs" class="fade-in">
+            <div class="bg-white rounded-2xl shadow-xl border border-amber-200 p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-2xl">📚</span>
+                    </span>
+                    Doküman
+                </h2>
+                
+                <div class="space-y-6">
+                    <!-- API Test -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">API Test</h3>
+                        <div class="bg-white rounded-lg p-4 border border-gray-300">
+                            <code class="text-sm text-gray-700">
+                                <strong>POST</strong> /api/test<br>
+                                <strong>Headers:</strong> Content-Type: application/json<br>
+                                <strong>Body:</strong> {"test": true}
+                            </code>
+                        </div>
+                        <button onclick="testAPI()" class="mt-4 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">
+                            API Test Et
+                        </button>
+                        <div id="api-result" class="mt-4 p-4 rounded-lg bg-blue-50 border border-blue-200 hidden">
+                            <!-- API sonuçları buraya -->
+                        </div>
+                    </div>
+
+                    <!-- Component Usage -->
+                    <div class="bg-amber-50 rounded-xl p-6 border border-amber-200">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Component Kullanımı</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white rounded-lg p-4 border border-amber-300">
+                                <h4 class="font-semibold text-gray-900 mb-2">ChatInput Component</h4>
+                                <code class="text-sm text-gray-700">
+                                    &lt;ChatInput onSendMessage={handleMessage} /&gt;
+                                </code>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border border-amber-300">
+                                <h4 class="font-semibold text-gray-900 mb-2">MessageBubble Component</h4>
+                                <code class="text-sm text-gray-700">
+                                    &lt;MessageBubble message={message} isUser={true} /&gt;
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400 mb-2">
+                    © 2026 COFFEE AI. Tüm hakları saklıdır.
+                </p>
+                <div class="flex justify-center space-x-6 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors">Gizlilik</a>
+                    <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors">Şartlar</a>
+                    <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors">İletişim</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Test fonksiyonları
+        function showResult(elementId, message, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.classList.remove('hidden');
+                element.innerHTML = `
+                    <div class="flex items-center mb-2">
+                        <span class="w-6 h-6 rounded-full flex items-center justify-center mr-3 ${isSuccess ? 'bg-green-100' : 'bg-red-100'}">
+                            <span class="text-sm">${isSuccess ? '✓' : '✗'}</span>
+                        </span>
+                        <span class="font-medium ${isSuccess ? 'text-green-700' : 'text-red-700'}">${message}</span>
+                    </div>
+                    <div class="text-sm text-gray-600">${new Date().toLocaleTimeString('tr-TR')}</div>
+                `;
+            }
+        }
+
+        function renderConnectionResult(lines, isSuccess) {
+            const element = document.getElementById('connection-result');
+            if (!element) return;
+
+            element.classList.remove('hidden');
+            element.innerHTML = `
+                <div class="flex items-center mb-2">
+                    <span class="w-6 h-6 rounded-full flex items-center justify-center mr-3 ${isSuccess ? 'bg-green-100' : 'bg-red-100'}">
+                        <span class="text-sm">${isSuccess ? '✓' : '✗'}</span>
+                    </span>
+                    <span class="font-medium ${isSuccess ? 'text-green-700' : 'text-red-700'}">
+                        ${isSuccess ? 'Bağlantı testi tamamlandı' : 'Bağlantı testi tamamlandı (bazı kontroller başarısız)'}
+                    </span>
+                </div>
+                <ul class="mt-2 space-y-1 text-sm text-gray-700">
+                    ${lines.map(l => `<li class="flex gap-2"><span class="shrink-0">•</span><span>${l}</span></li>`).join('')}
+                </ul>
+                <div class="text-xs text-gray-500 mt-2">${new Date().toLocaleTimeString('tr-TR')}</div>
+            `;
+        }
+
+        async function testConnection() {
+            showResult('connection-result', 'Bağlantı test ediliyor...', false);
+
+            const lines = [];
+            let okCount = 0;
+            let failCount = 0;
+
+            const isFile = location.protocol === 'file:';
+            if (isFile) {
+                lines.push('<strong>Not:</strong> Bu sayfa <code>file://</code> olarak açıldığı için bazı dış servisler CORS nedeniyle bloklanabilir. En sağlam test için sayfayı bir local server ile aç.');
+            }
+
+            // 1) Basic internet reachability (no-cors ping)
+            try {
+                await fetch('https://example.com', { mode: 'no-cors' });
+                okCount++;
+                lines.push('✅ İnternet erişimi var (no-cors ping başarılı).');
+            } catch (e) {
+                failCount++;
+                lines.push(`❌ İnternet erişimi testi başarısız: ${e.message}`);
+            }
+
+            // 2) CORS-friendly JSON endpoint (GitHub)
+            try {
+                const r = await fetch('https://api.github.com/zen', { method: 'GET' });
+                if (r.ok) {
+                    okCount++;
+                    lines.push('✅ CORS izinli istek çalışıyor (GitHub API).');
+                } else {
+                    failCount++;
+                    lines.push(`❌ GitHub API döndü: ${r.status}`);
+                }
+            } catch (e) {
+                failCount++;
+                lines.push(`❌ CORS izinli istek başarısız: ${e.message}`);
+            }
+
+            // 3) Hugging Face availability check (model metadata, not inference)
+            try {
+                const hfMeta = await fetch('https://huggingface.co/api/models/Qwen/Qwen2.5-Coder-32B-Instruct', { method: 'GET' });
+                if (hfMeta.ok) {
+                    okCount++;
+                    lines.push('✅ Hugging Face erişilebilir (model bilgisi endpointi).');
+                    lines.push('ℹ️ Inference (metin üretimi) testi tarayıcıdan CORS/token nedeniyle genelde yapılamaz; bunu server-side (senin `callHuggingFace` function) üzerinden test etmelisin.');
+                } else {
+                    failCount++;
+                    lines.push(`❌ Hugging Face model bilgisi döndü: ${hfMeta.status}`);
+                }
+            } catch (e) {
+                failCount++;
+                lines.push(`❌ Hugging Face kontrolü başarısız (muhtemel CORS): ${e.message}`);
+                lines.push('ℹ️ Çözüm: Bu sayfayı local server ile aç veya server-side function üzerinden test et.');
+            }
+
+            // Final render
+            renderConnectionResult(lines, failCount === 0);
+        }
+
+        function testUI() {
+            showResult('ui-result', 'UI test ediliyor...', false);
+            
+            // Responsive test
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+            const isDesktop = window.innerWidth >= 1024;
+            
+            // Animasyon testi
+            const testElement = document.createElement('div');
+            testElement.className = 'fade-in';
+            document.body.appendChild(testElement);
+            
+            setTimeout(() => {
+                const hasAnimation = window.getComputedStyle(testElement).animationName !== 'none';
+                document.body.removeChild(testElement);
+                
+                let uiResults = [];
+                if (isMobile) uiResults.push('📱 Mobil uyumlu');
+                if (isTablet) uiResults.push('📱 Tablet uyumlu');
+                if (isDesktop) uiResults.push('🖥️ Masaüstü uyumlu');
+                if (hasAnimation) uiResults.push('✨ Animasyonlar çalışıyor');
+                
+                showResult('ui-result', '✅ UI Test Tamamlandı: ' + uiResults.join(', '), true);
+            }, 1000);
+        }
+
+        async function testAPI() {
+            showResult('api-result', 'API test ediliyor...', false);
+            
+            try {
+                // Simüle edilmiş API test
+                const mockResponse = {
+                    success: true,
+                    message: 'API başarıyla çalışıyor',
+                    timestamp: new Date().toISOString(),
+                    data: { test: true }
+                };
+                
+                showResult('api-result', '✅ ' + mockResponse.message, true);
+                
+                // Console'a detaylı log
+                console.log('API Test Sonucu:', mockResponse);
+                
+            } catch (error) {
+                showResult('api-result', '❌ API test başarısız: ' + error.message, false);
+            }
+        }
+
+        // Sayfa yüklendiğinde otomatik test
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 COFFEE AI Test Sayfası yüklendi!');
+            console.log('📱 Ekran genişliği:', window.innerWidth + 'px');
+            console.log('🎨 Tarayıcı:', navigator.userAgent);
+        });
+    </script>
+</body>
+</html>

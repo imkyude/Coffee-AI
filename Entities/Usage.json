@@ -1,0 +1,99 @@
+export class Usage {
+  constructor(data = {}) {
+    this.id = data.id || this.generateId();
+    this.userId = data.userId || null;
+    this.period = data.period || 'monthly'; // daily, weekly, monthly, yearly
+    this.messages = data.messages || {
+      used: 0,
+      limit: 1000,
+      resetDate: this.getNextResetDate()
+    };
+    this.apiCalls = data.apiCalls || {
+      used: 0,
+      limit: 5000,
+      resetDate: this.getNextResetDate()
+    };
+    this.storage = data.storage || {
+      used: 0, // in bytes
+      limit: 1073741824, // 1GB in bytes
+      resetDate: null // storage doesn't reset
+    };
+    this.createdAt = data.createdAt || new Date().toISOString();
+    this.updatedAt = data.updatedAt || new Date().toISOString();
+  }
+
+  generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
+
+  getNextResetDate() {
+    const now = new Date();
+    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    return nextMonth.toISOString();
+  }
+
+  incrementMessages(count = 1) {
+    this.messages.used += count;
+    this.updatedAt = new Date().toISOString();
+    return this.messages.used <= this.messages.limit;
+  }
+
+  incrementApiCalls(count = 1) {
+    this.apiCalls.used += count;
+    this.updatedAt = new Date().toISOString();
+    return this.apiCalls.used <= this.apiCalls.limit;
+  }
+
+  addStorage(bytes) {
+    this.storage.used += bytes;
+    this.updatedAt = new Date().toISOString();
+    return this.storage.used <= this.storage.limit;
+  }
+
+  removeStorage(bytes) {
+    this.storage.used = Math.max(0, this.storage.used - bytes);
+    this.updatedAt = new Date().toISOString();
+  }
+
+  resetUsage() {
+    this.messages.used = 0;
+    this.apiCalls.used = 0;
+    this.messages.resetDate = this.getNextResetDate();
+    this.apiCalls.resetDate = this.getNextResetDate();
+    this.updatedAt = new Date().toISOString();
+  }
+
+  getUsagePercentage(type) {
+    const usage = this[type];
+    if (!usage || usage.limit === 0) return 0;
+    return Math.min((usage.used / usage.limit) * 100, 100);
+  }
+
+  isNearLimit(type, threshold = 80) {
+    return this.getUsagePercentage(type) >= threshold;
+  }
+
+  isAtLimit(type) {
+    const usage = this[type];
+    return usage && usage.used >= usage.limit;
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      userId: this.userId,
+      period: this.period,
+      messages: this.messages,
+      apiCalls: this.apiCalls,
+      storage: this.storage,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt
+    };
+  }
+
+  static fromJSON(json) {
+    return new Usage(json);
+  }
+}
+
+export default Usage;

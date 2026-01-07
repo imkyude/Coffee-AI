@@ -1,0 +1,79 @@
+export class Chat {
+  constructor(data = {}) {
+    this.id = data.id || this.generateId();
+    this.projectId = data.projectId || null;
+    this.title = data.title || 'New Chat';
+    this.messages = data.messages || [];
+    this.createdAt = data.createdAt || new Date().toISOString();
+    this.updatedAt = data.updatedAt || new Date().toISOString();
+    this.model = data.model || 'gpt-3.5-turbo';
+    this.status = data.status || 'active'; // active, archived, deleted
+    this.settings = data.settings || {
+      temperature: 0.7,
+      maxTokens: 1000,
+      systemPrompt: null
+    };
+  }
+
+  generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
+
+  addMessage(content, isUser = true) {
+    const message = {
+      id: this.generateId(),
+      content,
+      isUser,
+      timestamp: new Date().toISOString(),
+      model: this.model
+    };
+    
+    this.messages.push(message);
+    this.updatedAt = new Date().toISOString();
+    
+    if (this.messages.length === 1 && isUser) {
+      this.title = content.length > 50 ? content.substring(0, 50) + '...' : content;
+    }
+    
+    return message;
+  }
+
+  getLastMessage() {
+    return this.messages.length > 0 ? this.messages[this.messages.length - 1] : null;
+  }
+
+  update(updates) {
+    Object.assign(this, updates);
+    this.updatedAt = new Date().toISOString();
+  }
+
+  archive() {
+    this.status = 'archived';
+    this.updatedAt = new Date().toISOString();
+  }
+
+  delete() {
+    this.status = 'deleted';
+    this.updatedAt = new Date().toISOString();
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      projectId: this.projectId,
+      title: this.title,
+      messages: this.messages,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      model: this.model,
+      status: this.status,
+      settings: this.settings
+    };
+  }
+
+  static fromJSON(json) {
+    return new Chat(json);
+  }
+}
+
+export default Chat;
