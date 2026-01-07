@@ -34,8 +34,3 @@ coffee/
 ## ⚠️ Notes
 - **Base44:** Local development wont start Base44 foncitons. Production/Deploy needed.
 - **Tailwind:** Components is using Tailwind classes. `tailwind.config.js` is needed.
-
-- Base44 entegrasyonu hazır
-
-**İyi testler!** 🚀
-
